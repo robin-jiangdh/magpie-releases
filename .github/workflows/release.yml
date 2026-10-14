@@ -1,7 +1,7 @@
 name: Release
 
 # Builds, signs, notarises and publishes magpie. Pushing a v* tag on
-# yetone/magpie dispatches here, and the builds land on this repo's
+# robin-jiangdh/magpie dispatches here, and the builds land on this repo's
 # Releases, where anyone can download them: the desktop app for macOS,
 # Windows and Linux, and the terminal-only build for every platform.
 #
@@ -18,7 +18,7 @@ name: Release
 # gateway.
 #
 # The source is checked out with MAGPIE_DEPLOY_KEY, a read-only deploy key
-# on yetone/magpie.
+# on robin-jiangdh/magpie.
 
 on:
   repository_dispatch:
@@ -26,7 +26,7 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: 'Git ref of yetone/magpie to build (tag or branch)'
+        description: 'Git ref of robin-jiangdh/magpie to build (tag or branch)'
         required: true
         type: string
       version:
@@ -58,7 +58,7 @@ jobs:
       - name: Checkout magpie source code
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          repository: yetone/magpie
+          repository: robin-jiangdh/magpie
           ssh-key: ${{ secrets.MAGPIE_DEPLOY_KEY }}
           ref: ${{ env.REF }}
 
@@ -201,7 +201,7 @@ jobs:
       - name: Checkout magpie source code
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          repository: yetone/magpie
+          repository: robin-jiangdh/magpie
           ssh-key: ${{ secrets.MAGPIE_DEPLOY_KEY }}
           ref: ${{ env.REF }}
 
@@ -281,7 +281,7 @@ jobs:
       - name: Checkout magpie source code
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          repository: yetone/magpie
+          repository: robin-jiangdh/magpie
           ssh-key: ${{ secrets.MAGPIE_DEPLOY_KEY }}
           ref: ${{ env.REF }}
 
@@ -331,7 +331,7 @@ jobs:
       - name: Checkout magpie source code
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          repository: yetone/magpie
+          repository: robin-jiangdh/magpie
           ssh-key: ${{ secrets.MAGPIE_DEPLOY_KEY }}
           ref: ${{ env.REF }}
           fetch-depth: 0
@@ -375,7 +375,7 @@ jobs:
             CHANGELOG=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty' 2>/dev/null)
             # a refusal (a spent balance, a retired model) is said, not
             # silently turned into the commit list (10-13 to 10-14: no
-            # notes and no Chinese for four releases, yetone/magpie#2122)
+            # notes and no Chinese for four releases, robin-jiangdh/magpie#2122)
             [ -n "$CHANGELOG" ] || echo "::warning::DeepSeek wrote no changelog: $(echo "$RESPONSE" | jq -c '.error // .' 2>/dev/null | head -c 500)"
           fi
           if [ -z "$CHANGELOG" ]; then
